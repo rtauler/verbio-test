@@ -1,0 +1,19 @@
+stages:
+  - build
+
+build:static:brain:
+  cache: {}
+  stage: build
+  image: ekidd/rust-musl-builder:stable-openssl11
+  only:
+    - tags
+  script:
+    - unset CARGO_HOME
+    - unset RUSTC_WRAPPER
+    - cargo build --release
+  variables:
+  artifacts:
+    paths:
+      - target/x86_64-unknown-linux-musl/release/frontend-job-requirement
+
+

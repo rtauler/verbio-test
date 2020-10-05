@@ -13,8 +13,7 @@ export class AuthService {
     return this.http.post('http://0.0.0.0:5556/login', {
       user,
       password
-    }).subscribe(data => 
-      console.log(data, ' this is what the server gave us'))
+    })
   }
 
 }

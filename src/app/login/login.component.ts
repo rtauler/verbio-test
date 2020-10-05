@@ -19,7 +19,13 @@ export class LoginComponent implements OnInit {
     const user = target.querySelector("#user").value
     const password = target.querySelector("#password").value
     
-    this.Auth.getUserDetails(user, password)
+    this.Auth.getUserDetails(user, password).subscribe(data => {
+      if(data.success){
+       //redirect to /admin 
+      } else{
+        window.alert(data.message)
+      }
+    })
     console.log(user,password)
   }
 

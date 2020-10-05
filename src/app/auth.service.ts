@@ -3,8 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 interface myData{
   session_id: string;
-  success: boolean;
-  message: string;
+  response: string;
 }
 
 @Injectable({
@@ -30,6 +29,10 @@ export class AuthService {
       user,
       password
     })
+  }
+
+  getToken(){
+    return localStorage.getItem('token')
   }
 
 }

@@ -22,6 +22,12 @@ export class LoginComponent implements OnInit {
     
     this.Auth.getUserDetails(user, password).subscribe(
       res => {
+        if(res.session_id){
+          this.router.navigate(['/admin']);
+          this.Auth.setLoggedIn(true)
+        } else{
+          console.log('nope')
+        }
         console.log(res)
         localStorage.setItem('token',res.session_id)
       },

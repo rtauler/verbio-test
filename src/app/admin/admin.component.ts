@@ -9,14 +9,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminComponent implements OnInit {
   
-  messages = [''];
-  addMessage(newMessage: string) {
-    if (newMessage) {
-      this.messages.push(newMessage);
-      
-      
-    }
-  }
   
   text:string
   
@@ -31,8 +23,11 @@ export class AdminComponent implements OnInit {
     text:this.text
   }).toPromise().then(
     (data:any) => {
-      console.log(data.response)
-      this.userMessages = data.response;
+
+      this.userMessages.push.apply(this.userMessages, data.response)
+      console.log(this.userMessages)
+      console.log(data)
+
   })
   
 }
@@ -42,6 +37,7 @@ ngOnInit(): void {
   .subscribe(
     (data: any) => {
       this.botMessages = data.response; 
+      console.log(this.botMessages)
       // Where you find the array res.data or res.data.data
       
       

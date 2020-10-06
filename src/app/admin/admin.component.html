@@ -13,17 +13,11 @@
 <input type="text" [(ngModel)]="text" placeholder="Name" />
 <button (click)="postData()">Post Data</button>
 
-<ul>
-    <li *ngFor="let message of messages">{{message}}</li>
-</ul>
 
 <ul *ngFor="let values of botMessages">
-    <li>
-        <div class="">{{values.text}}</div>
-    </li>
+    <li>{{values.text}}</li>
 </ul>
 
 <ul *ngFor="let values of userMessages">
     <li>{{values.text}}</li>
-    <li><img src="{{values.url}}" alt=""></li>
 </ul>

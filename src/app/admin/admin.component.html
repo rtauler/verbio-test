@@ -1,21 +1,22 @@
 <p>admin works!</p>
 
-<pre>{{myData | json}}</pre>
+<pre>{{botMessages | json}}</pre>
 
-<pre>{{allCourses | json}}</pre>
+<!-- <pre>{{messages | json}}</pre> -->
 
 
-<ul *ngFor="let values of myData?.response;let i=index">
-    <li>
-        <div class="">{{values.text}} of {{i}}</div>
-        <div class="">{{values.text}} of {{i}}</div>
-    </li>
-</ul>
 
 <input #newMessage (keyup.enter)="addMessage(newMessage.value)" (blur)="addMessage(newMessage.value); newMessage.value='' ">
 
 <button (click)="addMessage(newMessage.value)">Add</button>
 
+
 <ul>
     <li *ngFor="let message of messages">{{message}}</li>
+</ul>
+
+<ul *ngFor="let values of botMessages;let i=index">
+    <li>
+        <div class="">{{values.text}} of {{i}}</div>
+    </li>
 </ul>

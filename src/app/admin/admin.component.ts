@@ -12,10 +12,13 @@ export class AdminComponent implements OnInit {
   addMessage(newMessage: string) {
     if (newMessage) {
       this.messages.push(newMessage);
+  
     }
   }
 
-  myData: any[] = [];
+  botMessages: any[] = [];
+  
+
   
   constructor(private http: HttpClient) {}
   
@@ -23,9 +26,10 @@ export class AdminComponent implements OnInit {
     this.http.get('http://0.0.0.0:5556/getWelcomeMessage')
     .subscribe(
       (data: any) => {
-        this.myData = data; 
+        this.botMessages = data.response; 
         // Where you find the array res.data or res.data.data
-        console.log('res is ', data);
+
+
       },
       error => {
         alert("ERROR");

@@ -1,1 +1,10 @@
 <p>admin works!</p>
+
+<pre>{{myData | json}}</pre>
+
+<ul *ngFor="let values of data?.response;let i=index">
+    <li>
+        <div class="">{{values.text}} of {{i}}</div>
+        <div class="">{{values.text}} of {{i}}</div>
+    </li>
+</ul>

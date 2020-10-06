@@ -17,8 +17,13 @@
     <li *ngFor="let message of messages">{{message}}</li>
 </ul>
 
-<ul *ngFor="let values of botMessages;let i=index">
+<ul *ngFor="let values of botMessages">
     <li>
-        <div class="">{{values.text}} of {{i}}</div>
+        <div class="">{{values.text}}</div>
     </li>
+</ul>
+
+<ul *ngFor="let values of userMessages">
+    <li>{{values.text}}</li>
+    <li><img src="{{values.url}}" alt=""></li>
 </ul>

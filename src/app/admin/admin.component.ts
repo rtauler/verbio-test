@@ -8,31 +8,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminComponent implements OnInit {
   
-  // constructor(private http: HttpClient) {  
-  //   this.http.get('http://0.0.0.0:5556/getWelcomeMessage').toPromise().then(
-  //   data => {
-  //     console.log(data);
-  //   }
-  //   )
-  // }
-  
-  myData: any[] = [];
+  messages = [''];
+  addMessage(newMessage: string) {
+    if (newMessage) {
+      this.messages.push(newMessage);
+    }
+  }
 
+  myData: any[] = [];
+  
   constructor(private http: HttpClient) {}
   
   ngOnInit(): void {
     this.http.get('http://0.0.0.0:5556/getWelcomeMessage')
     .subscribe(
       (data: any) => {
-        alert("News Success");
         this.myData = data; 
         // Where you find the array res.data or res.data.data
         console.log('res is ', data);
       },
       error => {
         alert("ERROR");
-      });
-  
+      });      
+    }
+    
+    
   }
   
-}

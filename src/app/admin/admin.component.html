@@ -1,15 +1,14 @@
 <div class="chat-box">
+
+    <ul class="botMessages">
+        <li *ngFor="let values of botMessages">{{values.text}}</li>
+    </ul>
+
+    <ul class="userMessages">
+        <li *ngFor="let values of userMessages">{{values.text}}</li>
+        <img *ngFor="let values of userMessages" class="catImages" src="{{values.url}}" alt="">
+    </ul>
     <input type="text" [(ngModel)]="text" placeholder="Name" />
     <button (click)="postData()">Send</button>
     <button (click)="logout()">Logout</button>
-
-
-    <ul *ngFor="let values of botMessages">
-        <li>{{values.text}}</li>
-    </ul>
-
-    <ul *ngFor="let values of userMessages">
-        <li>{{values.text}}</li>
-        <img src="{{values.url}}" alt="">
-    </ul>
 </div>

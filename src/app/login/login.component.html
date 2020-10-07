@@ -2,7 +2,7 @@
     <div class="logo-wrapper">
         <img class="logo" src="/assets/logo.svg" alt="">
     </div>
-    <form class="login-form" (submit)="loginUser($event)">
+    <form class="login-form" (keyup.enter)="loginUser($event)" (submit)="loginUser($event)">
         <input type="text" placeholder="Username" id="user">
         <input type="password" placeholder="Password" id="password">
         <div class="submit-wrapper">

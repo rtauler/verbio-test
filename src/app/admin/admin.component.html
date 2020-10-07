@@ -1,14 +1,31 @@
+<button (click)="logout()">Logout</button>
 <div class="chat-box">
 
     <ul class="botMessages">
-        <li *ngFor="let values of botMessages">{{values.text}}</li>
+        <li *ngFor="let values of botMessages">
+            <span>{{values.text}}</span>
+        </li>
     </ul>
 
     <ul class="userMessages">
-        <li *ngFor="let values of userMessages">{{values.text}}</li>
-        <img *ngFor="let values of userMessages" class="catImages" src="{{values.url}}" alt="">
+        <li *ngFor="let values of userMessages">
+            <span>{{values.text}}</span>
+        </li>
+        <div *ngFor="let values of userMessages">
+            <img *ngIf="values.url" class="catImages" src="{{values.url}}" alt="">
+        </div>
     </ul>
-    <input type="text" [(ngModel)]="text" placeholder="Name" />
-    <button (click)="postData()">Send</button>
-    <button (click)="logout()">Logout</button>
+
+    <div class="chat-input">
+        <input #userInput class="user-input" type="text" (keyup.enter)="postData(); userInput.value = ''" [(ngModel)]="text" placeholder="Your message" />
+        <button class="send-btn" (click)="postData(); userInput.value = ''"></button>
+    </div>
+
+    <!-- <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+        <input name="first" ngModel required #first="ngModel">
+        <input name="last" ngModel>
+        <button>Submit</button>
+    </form> -->
+
+
 </div>

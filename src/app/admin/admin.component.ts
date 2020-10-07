@@ -28,13 +28,9 @@ export class AdminComponent implements OnInit {
     text:this.text
   }).toPromise().then(
     (data:any) => {
-
       this.userMessages.push.apply(this.userMessages, data.response)
-      console.log(this.userMessages)
-      console.log(data)
-
   })
-  
+
 }
 
 logout() {

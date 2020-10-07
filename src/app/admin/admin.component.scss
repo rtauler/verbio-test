@@ -2,7 +2,7 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 600px;
+    width: 50%;
     transform: translate(-50%, -50%);
     background-color: white;
     padding: 20px;
@@ -14,16 +14,58 @@
         list-style-type: none;
         padding: 0;
         margin: 0;
+        line-height: 2.0;
         li {
             margin: 0 0 10px 0;
+            span {
+                background-color: #EA3D5C;
+                color: white;
+                padding: 5px;
+                border-radius: 3px;
+            }
         }
     }
     .userMessages {
         list-style-type: none;
         padding: 0;
         margin: 0;
+        line-height: 2.0;
         li {
             margin: 0 0 10px 0;
+            span {
+                background-color: #66DABA;
+                color: white;
+                padding: 5px;
+                border-radius: 3px;
+                margin: 0 0 5px 0;
+            }
+        }
+        img {
+            width: 300px;
+            border-radius: 5px;
+        }
+    }
+    .chat-input {
+        display: flex;
+        justify-content: space-between;
+        background-color: white;
+        .user-input {
+            width: 80%;
+            border: none;
+            font-size: 16px;
+            border-bottom: 2px solid #A5A5A5;
+            color: #A5A5A5;
+        }
+        .send-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            background-color: #66DABA;
+            border: none;
+            background-image: url('/assets/arrow.svg');
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: 10px;
         }
     }
 }

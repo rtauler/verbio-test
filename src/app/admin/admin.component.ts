@@ -1,5 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -8,15 +10,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent implements OnInit {
-  
-  
+  public isLoggedIn$: BehaviorSubject<boolean>;
+    
   text:string
   
   userMessages: any[] = [];
   
   botMessages: any[] = [];
   
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {
+    const isLoggedIn = localStorage.getItem('loggedIn') === 'true';
+    this.isLoggedIn$ = new BehaviorSubject(isLoggedIn);
+  }
   
   postData(){
     this.http.post('http://0.0.0.0:5556/sendMessage',{
@@ -32,17 +37,18 @@ export class AdminComponent implements OnInit {
   
 }
 
+logout() {
+  // logic
+  localStorage.setItem('loggedIn', 'false');
+  this.isLoggedIn$.next(false);
+  this.router.navigate(['/login']);
+}
+
 ngOnInit(): void {
   this.http.get('http://0.0.0.0:5556/getWelcomeMessage')
   .subscribe(
     (data: any) => {
-      this.botMessages = data.response; 
-      console.log(this.botMessages)      
-      
-      //clear token if error
-      // if(!data.success){
-      //   localStorage.removeItem('loggedIn')
-      // }
+      this.botMessages = data.response;       
     },
     error => {
       alert("ERROR");

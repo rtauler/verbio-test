@@ -13,13 +13,15 @@ import { TokenInterceptorService } from './token-interceptor.service';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     AdminComponent,
-    HomeComponent
+    HomeComponent,
+    LogoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,6 +37,10 @@ import { FormsModule } from '@angular/forms';
         {
           path: 'login',
           component: LoginComponent
+        },
+        {
+          path: 'logout',
+          component: LogoutComponent
         },
         {
           path: 'admin',

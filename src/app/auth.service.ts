@@ -21,7 +21,7 @@ export class AuthService {
   }
 
   get isLoggedIn(){
-    return JSON.parse(localStorage.getItem('loggedIn') || this.loggedInStatus.toString())
+    return JSON.parse(localStorage.getItem('loggedIn') || this.loggedInStatus.toString)
   }
 
   getUserDetails(user,password){

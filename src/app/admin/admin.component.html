@@ -1,6 +1,7 @@
 <div class="chat-box">
     <input type="text" [(ngModel)]="text" placeholder="Name" />
     <button (click)="postData()">Send</button>
+    <button (click)="logout()">Logout</button>
 
 
     <ul *ngFor="let values of botMessages">

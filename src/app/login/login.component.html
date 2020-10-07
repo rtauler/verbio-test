@@ -1,5 +1,12 @@
-<form (submit)="loginUser($event)">
-    <input type="text" placeholder="Username" id="user">
-    <input type="password" placeholder="Password" id="password">
-    <input type="submit" value="Submit">
-</form>
+<div class="login-box">
+    <div class="logo-wrapper">
+        <img class="logo" src="/assets/logo.svg" alt="">
+    </div>
+    <form class="login-form" (submit)="loginUser($event)">
+        <input type="text" placeholder="Username" id="user">
+        <input type="password" placeholder="Password" id="password">
+        <div class="submit-wrapper">
+            <input type="submit" value="Submit" id="submit">
+        </div>
+    </form>
+</div>

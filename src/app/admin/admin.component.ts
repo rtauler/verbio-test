@@ -37,14 +37,18 @@ ngOnInit(): void {
   .subscribe(
     (data: any) => {
       this.botMessages = data.response; 
-      console.log(this.botMessages)
-      // Where you find the array res.data or res.data.data
+      console.log(this.botMessages)      
       
-      
+      //clear token if error
+      // if(!data.success){
+      //   localStorage.removeItem('loggedIn')
+      // }
     },
     error => {
       alert("ERROR");
     });      
+  
+    
   }
   
   

@@ -11,8 +11,9 @@ import { Router } from '@angular/router';
 })
 export class AdminComponent implements OnInit {
   public isLoggedIn$: BehaviorSubject<boolean>;
-    
-  text:string
+  
+  txtValue: string;
+  message : string;
   
   userMessages: any[] = [];
   
@@ -24,38 +25,51 @@ export class AdminComponent implements OnInit {
   }
   
   postData(){
-    this.http.post('http://0.0.0.0:5556/sendMessage',{
-    text:this.text
-  }).toPromise().then(
-    (data:any) => {
-      this.userMessages.push.apply(this.userMessages, data.response)
-  })
+      this.http.post('http://0.0.0.0:5556/sendMessage',{
+      text:this.txtValue
+    }).toPromise().then(
+      (data:any) => {
+        this.userMessages.push.apply(this.userMessages, data.response)
+      })    
+  }
 
-}
 
-logout() {
-  // logic
-  localStorage.setItem('loggedIn', 'false');
-  this.isLoggedIn$.next(false);
-  this.router.navigate(['/login']);
-}
-
-ngOnInit(): void {
-  this.http.get('http://0.0.0.0:5556/getWelcomeMessage')
-  .subscribe(
-    (data: any) => {
-      this.botMessages = data.response;       
-    },
-    error => {
-      alert("ERROR");
-    });      
+  checkEmpty(value)
+  {
+    this.txtValue = value;
+    if(this.txtValue == '')
+    {
+      console.log('empty!')
+    }else{
+      this.postData();
+    }
+    
+  }
   
+  logout() {
+    // logic
+    localStorage.setItem('loggedIn', 'false');
+    this.isLoggedIn$.next(false);
+    this.router.navigate(['/login']);
+  }
+  
+  ngOnInit(): void {
+    this.http.get('http://0.0.0.0:5556/getWelcomeMessage')
+    .subscribe(
+      (data: any) => {
+        this.botMessages = data.response;       
+      },
+      error => {
+        alert("ERROR");
+      });      
+      
+      
+    }
+    
     
   }
   
   
-}
-
-
-
-
+  
+  
+  

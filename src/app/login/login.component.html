@@ -3,8 +3,8 @@
         <img class="logo" src="/assets/logo.svg" alt="">
     </div>
     <form class="login-form" (keyup.enter)="checkEmpty($event)" (submit)="checkEmpty($event)">
-        <input #unameInput [(ngModel)]="txtValueUname" type="text" placeholder="Username" id="user">
-        <input #passwordInput [(ngModel)]="txtValuePassword" type="password" placeholder="Password" id="password">
+        <input #unameInput [(ngModel)]="txtValueUname" type="text" placeholder="Username" id="user" name="uname-input">
+        <input #passwordInput [(ngModel)]="txtValuePassword" type="password" placeholder="Password" name="password-input" id="password">
         <div class="submit-wrapper">
             <input type="submit" value="Submit" id="submit">
         </div>

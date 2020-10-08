@@ -1,23 +1,23 @@
-<button (click)="logout()">Logout</button>
+<button class="logout" (click)="logout()"></button>
 <div class="chat-box">
-
-    <ul class="botMessages">
-        <li *ngFor="let values of botMessages">
-            <span>{{values.text}}</span>
-        </li>
-    </ul>
-
-    <ul class="userMessages">
-        <li *ngFor="let values of userMessages">
-            <span>{{values.text}}</span>
-        </li>
-        <div *ngFor="let values of userMessages">
-            <img *ngIf="values.url" class="catImages" src="{{values.url}}" alt="">
-        </div>
-    </ul>
+    <div class="messages">
+        <ul class="botMessages">
+            <li *ngFor="let values of botMessages">
+                <span>{{values.text}}</span>
+            </li>
+        </ul>
+        <ul class="userMessages">
+            <li *ngFor="let values of userMessages">
+                <span>{{values.text}}</span>
+            </li>
+            <div *ngFor="let values of userMessages">
+                <img *ngIf="values.url" class="catImages" src="{{values.url}}" alt="">
+            </div>
+        </ul>
+    </div>
 
     <div class="chat-input">
-        <input #userInput class="user-input" type="text" (keyup.enter)="checkEmpty(userInput.value); userInput.value = '';" [(ngModel)]="txtValue" placeholder="Your message" />
+        <input #userInput class="user-input" type="text" (keyup.enter)="checkEmpty(userInput.value); userInput.value = '';" [(ngModel)]="txtValue" placeholder="Your message" name="user-input" />
         <button class="send-btn" (click)="checkEmpty(userInput.value); userInput.value = ''"></button>
     </div>
 

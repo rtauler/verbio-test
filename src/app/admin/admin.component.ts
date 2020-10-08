@@ -56,6 +56,7 @@ export class AdminComponent implements OnInit {
   }
   
   ngOnInit(): void {
+
     //initial function to get bots initial messages.
     this.http.get('http://0.0.0.0:5556/getWelcomeMessage')
     .subscribe(

@@ -1,48 +1,75 @@
+@import "~src/scss/mixins";
+.logout {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: #EA3D5C;
+    border: none;
+    background-image: url('/assets/logout.svg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 10px;
+    transition-duration: 0.3s;
+    cursor: pointer;
+    &:hover {
+        @include shadow;
+    }
+}
+
 .chat-box {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 50%;
+    width: 60%;
     transform: translate(-50%, -50%);
     background-color: white;
     padding: 20px;
     border-radius: 5px;
-    -webkit-box-shadow: 0px 8px 13px 4px rgba(0, 0, 0, 0.21);
-    -moz-box-shadow: 0px 8px 13px 4px rgba(0, 0, 0, 0.21);
-    box-shadow: 0px 8px 13px 4px rgba(0, 0, 0, 0.21);
-    .botMessages {
-        list-style-type: none;
-        padding: 0;
-        margin: 0;
-        line-height: 2.0;
-        li {
-            margin: 0 0 10px 0;
-            span {
-                background-color: #EA3D5C;
-                color: white;
-                padding: 5px;
-                border-radius: 3px;
-            }
-        }
+    transition-duration: 0.3s;
+    box-sizing: border-box;
+    &:hover {
+        @include shadow;
     }
-    .userMessages {
-        list-style-type: none;
-        padding: 0;
-        margin: 0;
-        line-height: 2.0;
-        li {
-            margin: 0 0 10px 0;
-            span {
-                background-color: #66DABA;
-                color: white;
-                padding: 5px;
-                border-radius: 3px;
-                margin: 0 0 5px 0;
+    @include responsive-box;
+    .messages {
+        max-height: 600px;
+        overflow: scroll;
+        .botMessages {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            line-height: 2.0;
+            li {
+                margin: 0 0 10px 0;
+                span {
+                    background-color: #EA3D5C;
+                    color: white;
+                    padding: 5px;
+                    border-radius: 3px;
+                    box-decoration-break: clone;
+                }
             }
         }
-        img {
-            width: 300px;
-            border-radius: 5px;
+        .userMessages {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            line-height: 2.0;
+            li {
+                margin: 0 0 10px 0;
+                span {
+                    background-color: #66DABA;
+                    color: white;
+                    padding: 5px;
+                    border-radius: 3px;
+                    margin: 0 0 5px 0;
+                    box-decoration-break: clone;
+                }
+            }
+            img {
+                width: 300px;
+                border-radius: 5px;
+            }
         }
     }
     .chat-input {
@@ -66,6 +93,11 @@
             background-repeat: no-repeat;
             background-position: center center;
             background-size: 10px;
+            transition-duration: 0.3s;
+            cursor: pointer;
+            &:hover {
+                @include shadow;
+            }
         }
     }
 }

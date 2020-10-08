@@ -11,6 +11,7 @@ export class HomeComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
+    //force navigation to login page
     this.router.navigate(['/login']);
   }
 

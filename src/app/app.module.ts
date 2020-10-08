@@ -13,7 +13,6 @@ import { TokenInterceptorService } from './token-interceptor.service';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +20,6 @@ import { LogoutComponent } from './logout/logout.component';
     LoginComponent,
     AdminComponent,
     HomeComponent,
-    LogoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,10 +36,7 @@ import { LogoutComponent } from './logout/logout.component';
           path: 'login',
           component: LoginComponent
         },
-        {
-          path: 'logout',
-          component: LogoutComponent
-        },
+        //this blocks admin page if not logged in
         {
           path: 'admin',
           component: AdminComponent,

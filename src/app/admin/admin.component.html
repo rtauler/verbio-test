@@ -18,16 +18,7 @@
 
     <div class="chat-input">
         <input #userInput class="user-input" type="text" (keyup.enter)="checkEmpty(userInput.value); userInput.value = '';" [(ngModel)]="txtValue" placeholder="Your message" />
-        <button class="send-btn" (click)="userInput.value = ''"></button>
+        <button class="send-btn" (click)="checkEmpty(userInput.value); userInput.value = ''"></button>
     </div>
-
-
-
-    <!-- <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
-        <input name="first" ngModel required #first="ngModel">
-        <input name="last" ngModel>
-        <button>Submit</button>
-    </form> -->
-
 
 </div>

@@ -11,7 +11,7 @@ export class AuthGuard implements CanActivate {
   constructor(private auth: AuthService){
 
   }
-
+//function to define that only logged in users can access the page.
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {

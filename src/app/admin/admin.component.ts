@@ -54,6 +54,7 @@ export class AdminComponent implements OnInit {
     text:this.txtValue
   }).toPromise().then(
     (data:any) => {
+      console.log(data.response)
       //push server response onto user messages array
       this.userMessages.push.apply(this.userMessages, data.response)
       //get localstorage stored messages
@@ -62,7 +63,8 @@ export class AdminComponent implements OnInit {
       this.userMessages.concat(this.userMessagesStored)
       //save onto local storage
       localStorage.setItem('user-messages', JSON.stringify(this.userMessages));
-    })    
+    })
+    //scroll to bottom each time user sends a message    
     this.container = document.getElementById("msgContainer"); 
     this.container.scrollTop = this.container.scrollHeight; 
   }
@@ -90,6 +92,7 @@ export class AdminComponent implements OnInit {
   }
   
   ngOnInit(): void {
+    //call checkmessages function to see if theres any messages stored in localstorage
     this.checkMessages();
     //initial function to get bots initial messages.
     this.http.get('http://0.0.0.0:5556/getWelcomeMessage')

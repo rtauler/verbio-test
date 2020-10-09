@@ -9,10 +9,9 @@
         <ul class="userMessages">
             <li *ngFor="let values of userMessages">
                 <span>{{values.text}}</span>
-            </li>
-            <div *ngFor="let values of userMessages">
                 <img *ngIf="values.url" class="catImages" src="{{values.url}}" alt="">
-            </div>
+            </li>
+
         </ul>
     </div>
 

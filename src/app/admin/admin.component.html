@@ -8,8 +8,10 @@
         </ul>
         <ul class="userMessages">
             <li *ngFor="let values of userMessages">
-                <span>{{values.text}}</span>
-                <img *ngIf="values.url" class="catImages" src="{{values.url}}" alt="">
+                <span>
+                    {{values.text}}
+                    <img *ngIf="values.url" class="catImages" src="{{values.url}}" alt="">
+                </span>
             </li>
 
         </ul>

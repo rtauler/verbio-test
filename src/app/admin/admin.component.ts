@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent implements OnInit, AfterViewChecked {
-
+  
   //variable delcaration
   public isLoggedIn$: BehaviorSubject<boolean>;
   txtValue: string;
@@ -18,26 +18,26 @@ export class AdminComponent implements OnInit, AfterViewChecked {
   userMessages: any[] = [];
   userMessagesStored: any[] = [];
   botMessages: any[] = [];
-
+  
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
-
-
+  
+  
   constructor(private http: HttpClient, private router: Router) {
     //define what means "idLoggedIn"
     const isLoggedIn = localStorage.getItem('loggedIn') === 'true';
     this.isLoggedIn$ = new BehaviorSubject(isLoggedIn);
   }
-
   
   
-
+  
+  
   scrollToBottom(): void {
     try {
-        this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+      this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
     } catch(err) { }                 
-}
-
-
+  }
+  
+  
   //check if user messages exist
   checkMessages(){
     
@@ -47,7 +47,7 @@ export class AdminComponent implements OnInit, AfterViewChecked {
       this.userMessagesStored = JSON.parse(localStorage.getItem('user-messages'));
       //replace empty usermessages by the stored ones
       this.userMessages.push.apply(this.userMessages,this.userMessagesStored)
-
+      
       //else, if there's no localstorage key created
     }else{
       console.log('no local storage key created')
@@ -55,8 +55,8 @@ export class AdminComponent implements OnInit, AfterViewChecked {
       localStorage.setItem('user-messages', JSON.stringify(this.userMessages));
     }
   }
-
-
+  
+  
   
   
   //function to send the message to server and get the response
@@ -78,7 +78,7 @@ export class AdminComponent implements OnInit, AfterViewChecked {
     })  
     this.scrollToBottom();
   }
-
+  
   //function that checks if input is empty, if it's not send the request using sendMessage() function
   checkEmpty(value)
   {
@@ -100,37 +100,44 @@ export class AdminComponent implements OnInit, AfterViewChecked {
     this.isLoggedIn$.next(false);
     this.router.navigate(['/login']);
   }
-
-
+  
+  
   
   ngOnInit(): void {
-    //check if token exist
+    //check if token doesnt exist exist
     if(!localStorage.getItem('token')){
-      //navigate to login page
+      //if token doesn't exist navigate to login page
       this.router.navigate(['/login'])
-      //set status to false
+      //set logged status to false
       localStorage.setItem('loggedIn', 'false');
     }
     //call checkmessages function to see if theres any messages stored in localstorage
     this.checkMessages();
-    //initial function to get bots initial messages.
-    this.http.get('http://0.0.0.0:5556/getWelcomeMessage')
-    .subscribe(
-      (data: any) => {
-        this.botMessages = data.response;       
-      },
-      error => {
-      });          
-      //this makes scrolling work properly
-      this.scrollToBottom();
-    } 
+    
+    if(localStorage.getItem('welcome-message')=='true'){
+      console.log('wellcome messages loaded')
+    }else{
+      //initial function to get bots initial messages.
+      this.http.get('http://0.0.0.0:5556/getWelcomeMessage')
+      .subscribe(
+        (data: any) => {
+          this.botMessages = data.response;       
+        },
+        error => {
+        });          
+        //this makes scrolling work properly
+        this.scrollToBottom();
+        localStorage.setItem('welcome', 'true');
+      } 
+    }
+    
     ngAfterViewChecked(): void {
       //this makes scrolling work properly
       this.scrollToBottom(); 
     }
   }
-
-        
+  
+  
   
   
   

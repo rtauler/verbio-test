@@ -17,7 +17,7 @@ export class AdminComponent implements OnInit, AfterViewChecked {
   message : string;
   userMessages: any[] = [];
   userMessagesStored: any[] = [];
-  botMessages: any[] = [];
+
   
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
   
@@ -124,12 +124,20 @@ export class AdminComponent implements OnInit, AfterViewChecked {
       .subscribe(
         (data: any) => {
           //get data from the server and put it onto array for template
-          this.botMessages = data.response;       
+          //this.botMessages = data.response;   
+          //push server response onto user messages array
+          this.userMessages.push.apply(this.userMessages, data.response)
+          //get localstorage stored messages
+          this.userMessagesStored = JSON.parse(localStorage.getItem('user-messages'));
+          //concatenate new messages to stored ones
+          this.userMessages.concat(this.userMessagesStored)
+          //save onto local storage
+          localStorage.setItem('user-messages', JSON.stringify(this.userMessages));       
         },
         error => {
         });          
         //indicate that the user has already recieved the wellcome messages
-        localStorage.setItem('welcome', 'true');
+        localStorage.setItem('welcome-message', 'true');
       } 
     }
     

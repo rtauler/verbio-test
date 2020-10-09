@@ -33,7 +33,7 @@
     @include responsive-box;
     .messages {
         max-height: 600px;
-        overflow: scroll;
+        overflow: auto;
         .botMessages {
             list-style-type: none;
             padding: 0;
@@ -42,7 +42,8 @@
             li {
                 margin: 0 0 10px 0;
                 span {
-                    background-color: #EA3D5C;
+                    background: rgb(234, 61, 92);
+                    background: linear-gradient(142deg, rgba(234, 61, 92, 1) 0%, rgba(174, 126, 130, 1) 100%);
                     color: white;
                     padding: 5px;
                     border-radius: 3px;
@@ -58,7 +59,8 @@
             li {
                 margin: 0 0 10px 0;
                 span {
-                    background-color: #66DABA;
+                    background: rgb(102, 218, 186);
+                    background: linear-gradient(142deg, rgba(102, 218, 186, 1) 0%, rgba(139, 189, 170, 1) 100%);
                     color: white;
                     padding: 5px;
                     border-radius: 3px;

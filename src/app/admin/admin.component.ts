@@ -17,7 +17,7 @@ export class AdminComponent implements OnInit, AfterViewChecked {
   message : string;
   userMessages: any[] = [];
   userMessagesStored: any[] = [];
-
+  
   
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
   
@@ -116,9 +116,8 @@ export class AdminComponent implements OnInit, AfterViewChecked {
     //call checkmessages function to see if theres any messages stored in localstorage
     this.checkMessages();
     
-    //check if user has already recieved the initial wellcome messages
-    if(localStorage.getItem('welcome-message')=='true'){
-    }else{
+    //check if user has already recieved the initial welcome messages
+    if(localStorage.getItem('welcome-message')=='false'){
       //initial function to get bots initial messages.
       this.http.get('http://0.0.0.0:5556/getWelcomeMessage')
       .subscribe(

@@ -1,5 +1,6 @@
 # Verbio test
 
+![](verbio-test.gif)
 
 
 ## Requirements:

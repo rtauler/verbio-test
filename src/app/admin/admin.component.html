@@ -1,6 +1,6 @@
 <button class="logout" (click)="logout()"></button>
 <div class="chat-box">
-    <div class="messages" id="msgContainer">
+    <div class="msgContainer" id="msgContainer" #scrollMe>
         <ul class="botMessages">
             <li *ngFor="let values of botMessages">
                 <span>{{values.text}}</span>
@@ -14,10 +14,8 @@
 
         </ul>
     </div>
-
     <div class="chat-input">
         <input #userInput class="user-input" type="text" (keyup.enter)="checkEmpty(userInput.value); userInput.value = '';" [(ngModel)]="txtValue" placeholder="Your message" name="user-input" />
-        <button class="send-btn" (click)="checkEmpty(userInput.value); userInput.value = ''"></button>
+        <button class="send-btn" (click)="checkEmpty(userInput.value); userInput.value = '';"></button>
     </div>
-
 </div>

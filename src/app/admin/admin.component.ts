@@ -1,5 +1,5 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewChecked  } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 
@@ -9,28 +9,38 @@ import { Router } from '@angular/router';
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.scss']
 })
-export class AdminComponent implements OnInit {
-  public isLoggedIn$: BehaviorSubject<boolean>;
-  container: HTMLElement;
+export class AdminComponent implements OnInit, AfterViewChecked {
+
   //variable delcaration
+  public isLoggedIn$: BehaviorSubject<boolean>;
   txtValue: string;
   message : string;
   userMessages: any[] = [];
   userMessagesStored: any[] = [];
   botMessages: any[] = [];
-  
+
+  @ViewChild('scrollMe') private myScrollContainer: ElementRef;
+
+
   constructor(private http: HttpClient, private router: Router) {
     //define what means "idLoggedIn"
     const isLoggedIn = localStorage.getItem('loggedIn') === 'true';
     this.isLoggedIn$ = new BehaviorSubject(isLoggedIn);
   }
+
   
   
-  // var guardado = localStorage.getItem('user-messages');
-  // console.log('objetoObtenido: ', JSON.parse(guardado));
-  
+
+  scrollToBottom(): void {
+    try {
+        this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+    } catch(err) { }                 
+}
+
+
   //check if user messages exist
   checkMessages(){
+    
     //check if local key for storing messages exists
     if(localStorage.getItem('user-messages')){
       //get localstorage stored messages
@@ -44,12 +54,14 @@ export class AdminComponent implements OnInit {
       //we create one
       localStorage.setItem('user-messages', JSON.stringify(this.userMessages));
     }
-    
   }
+
+
   
   
   //function to send the message to server and get the response
-  sendMessage(){
+  sendMessage(){ 
+    //send http request
     this.http.post('http://0.0.0.0:5556/sendMessage',{
     text:this.txtValue
   }).toPromise().then(
@@ -63,12 +75,10 @@ export class AdminComponent implements OnInit {
       this.userMessages.concat(this.userMessagesStored)
       //save onto local storage
       localStorage.setItem('user-messages', JSON.stringify(this.userMessages));
-    })
-    //scroll to bottom each time user sends a message    
-    this.container = document.getElementById("msgContainer"); 
-    this.container.scrollTop = this.container.scrollHeight; 
+    })  
+    this.scrollToBottom();
   }
-  
+
   //function that checks if input is empty, if it's not send the request using sendMessage() function
   checkEmpty(value)
   {
@@ -90,8 +100,17 @@ export class AdminComponent implements OnInit {
     this.isLoggedIn$.next(false);
     this.router.navigate(['/login']);
   }
+
+
   
   ngOnInit(): void {
+    //check if token exist
+    if(!localStorage.getItem('token')){
+      //navigate to login page
+      this.router.navigate(['/login'])
+      //set status to false
+      localStorage.setItem('loggedIn', 'false');
+    }
     //call checkmessages function to see if theres any messages stored in localstorage
     this.checkMessages();
     //initial function to get bots initial messages.
@@ -101,14 +120,18 @@ export class AdminComponent implements OnInit {
         this.botMessages = data.response;       
       },
       error => {
-        alert("ERROR");
-      });      
-      
-      
+      });          
+      //this makes scrolling work properly
+      this.scrollToBottom();
+    } 
+    ngAfterViewChecked(): void {
+      //this makes scrolling work properly
+      this.scrollToBottom(); 
     }
-    
-    
   }
+
+        
+  
   
   
   

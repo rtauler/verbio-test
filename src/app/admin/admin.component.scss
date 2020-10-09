@@ -31,9 +31,9 @@
         @include shadow;
     }
     @include responsive-box;
-    .messages {
-        max-height: 600px;
-        overflow: auto;
+    .msgContainer {
+        height: 600px;
+        overflow-y: scroll;
         .botMessages {
             list-style-type: none;
             padding: 0;
@@ -75,6 +75,7 @@
         }
     }
     .chat-input {
+        margin: 10px 0 0 0;
         display: flex;
         justify-content: space-between;
         background-color: white;

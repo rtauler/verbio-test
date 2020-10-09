@@ -1,6 +1,6 @@
 <button class="logout" (click)="logout()"></button>
 <div class="chat-box">
-    <div class="messages" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+    <div class="messages" id="msgContainer">
         <ul class="botMessages">
             <li *ngFor="let values of botMessages">
                 <span>{{values.text}}</span>

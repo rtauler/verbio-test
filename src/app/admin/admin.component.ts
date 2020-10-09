@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class AdminComponent implements OnInit {
   public isLoggedIn$: BehaviorSubject<boolean>;
-  
+  container: HTMLElement;
   //variable delcaration
   txtValue: string;
   message : string;
@@ -63,6 +63,8 @@ export class AdminComponent implements OnInit {
       //save onto local storage
       localStorage.setItem('user-messages', JSON.stringify(this.userMessages));
     })    
+    this.container = document.getElementById("msgContainer"); 
+    this.container.scrollTop = this.container.scrollHeight; 
   }
   
   //function that checks if input is empty, if it's not send the request using sendMessage() function

@@ -8,8 +8,6 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  txtValueUname:string;
-  txtValuePassword:string;
   
   constructor(private Auth: AuthService, private router: Router) { }
   
@@ -26,16 +24,14 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/admin']);
           this.Auth.setLoggedIn(true)
         } else{
-          console.log('nope')
         }
-        console.log(res)
+        //save in localstorage the token that the server gave us
         localStorage.setItem('token',res.session_id)
       },
       err => console.log(err)
       )
     }
-  
-    
+     
     checkEmpty(event)
     { 
       event.preventDefault()
@@ -49,13 +45,11 @@ export class LoginComponent implements OnInit {
       if(user == '' || password == '')
       {
         //if so do not proceed with http request and display error
-        console.log('some field is empty!')
+        alert('Login or Password field is empty!')
       }else{
         //if either are filled, proceed with the http request
         this.loginUser(user,password);
-      }
-      
-    }
-    
+      }      
+    }    
   }
   

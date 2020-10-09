@@ -30,7 +30,7 @@ export class AdminComponent implements OnInit, AfterViewChecked {
   
   
   
-  
+  //function to call when a scroll down is needed
   scrollToBottom(): void {
     try {
       this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
@@ -82,22 +82,24 @@ export class AdminComponent implements OnInit, AfterViewChecked {
   //function that checks if input is empty, if it's not send the request using sendMessage() function
   checkEmpty(value)
   {
+    //get the value of the text input
     this.txtValue = value;
+    //check if the value is empty
     if(this.txtValue == '')
-    {
-      console.log('empty!')
-    }else{
+    {}else{
       this.sendMessage();
-    }
-    
+    }    
   }
   
-  //function to logout the user
+  //function to logout the user on logout button
   logout() {
-    // logic
+    // set local storage item to false
     localStorage.setItem('loggedIn', 'false');
+    //remove the token
     localStorage.removeItem('token');
+    //set status of routing to false
     this.isLoggedIn$.next(false);
+    //redirect user to login page
     this.router.navigate(['/login']);
   }
   
@@ -114,19 +116,19 @@ export class AdminComponent implements OnInit, AfterViewChecked {
     //call checkmessages function to see if theres any messages stored in localstorage
     this.checkMessages();
     
+    //check if user has already recieved the initial wellcome messages
     if(localStorage.getItem('welcome-message')=='true'){
-      console.log('wellcome messages loaded')
     }else{
       //initial function to get bots initial messages.
       this.http.get('http://0.0.0.0:5556/getWelcomeMessage')
       .subscribe(
         (data: any) => {
+          //get data from the server and put it onto array for template
           this.botMessages = data.response;       
         },
         error => {
         });          
-        //this makes scrolling work properly
-        this.scrollToBottom();
+        //indicate that the user has already recieved the wellcome messages
         localStorage.setItem('welcome', 'true');
       } 
     }

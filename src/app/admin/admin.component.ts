@@ -17,26 +17,21 @@ export class AdminComponent implements OnInit, AfterViewChecked {
   message : string;
   userMessages: any[] = [];
   userMessagesStored: any[] = [];
-  
-  
+  botMessages: any[] = [];
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
-  
-  
+   
   constructor(private http: HttpClient, private router: Router) {
     //define what means "idLoggedIn"
     const isLoggedIn = localStorage.getItem('loggedIn') === 'true';
     this.isLoggedIn$ = new BehaviorSubject(isLoggedIn);
   }
-  
-  
-  
+   
   //function to call when a scroll down is needed
   scrollToBottom(): void {
     try {
       this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
     } catch(err) { }                 
   }
-  
   
   //check if user messages exist
   checkMessages(){
@@ -50,14 +45,10 @@ export class AdminComponent implements OnInit, AfterViewChecked {
       
       //else, if there's no localstorage key created
     }else{
-      console.log('no local storage key created')
       //we create one
       localStorage.setItem('user-messages', JSON.stringify(this.userMessages));
     }
   }
-  
-  
-  
   
   //function to send the message to server and get the response
   sendMessage(){ 
@@ -66,7 +57,6 @@ export class AdminComponent implements OnInit, AfterViewChecked {
     text:this.txtValue
   }).toPromise().then(
     (data:any) => {
-      console.log(data.response)
       //push server response onto user messages array
       this.userMessages.push.apply(this.userMessages, data.response)
       //get localstorage stored messages
@@ -103,8 +93,6 @@ export class AdminComponent implements OnInit, AfterViewChecked {
     this.router.navigate(['/login']);
   }
   
-  
-  
   ngOnInit(): void {
     //check if token doesnt exist exist
     if(!localStorage.getItem('token')){
@@ -116,8 +104,9 @@ export class AdminComponent implements OnInit, AfterViewChecked {
     //call checkmessages function to see if theres any messages stored in localstorage
     this.checkMessages();
     
-    //check if user has already recieved the initial welcome messages
-    if(localStorage.getItem('welcome-message')=='false'){
+    //check if user has already recieved the initial wellcome messages
+    if(localStorage.getItem('welcome-message')=='true'){
+    }else{
       //initial function to get bots initial messages.
       this.http.get('http://0.0.0.0:5556/getWelcomeMessage')
       .subscribe(

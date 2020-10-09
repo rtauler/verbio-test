@@ -16,13 +16,13 @@
 }
 
 @mixin responsive-box {
-    @media (max-width: 500px) {
+    @media (max-width: 700px) {
         width: calc(100% - 40px);
     }
     @media (min-width: 700px) {
-        width: 50%;
+        width: 70%;
     }
     @media (min-width: 900px) {
-        width: 40%;
+        width: 60%;
     }
 }

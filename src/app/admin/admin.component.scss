@@ -1,5 +1,7 @@
 @import "~src/scss/mixins";
 .logout {
+    position: fixed;
+    top: 15px;
     width: 40px;
     height: 40px;
     border-radius: 20px;
@@ -34,23 +36,6 @@
     .msgContainer {
         height: 600px;
         overflow-y: scroll;
-        .botMessages {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            li {
-                margin: 0 0 10px 0;
-                span {
-                    background: rgb(234, 61, 92);
-                    background: linear-gradient(142deg, rgba(234, 61, 92, 1) 0%, rgba(174, 126, 130, 1) 100%);
-                    color: white;
-                    padding: 5px;
-                    border-radius: 3px;
-                    box-decoration-break: clone;
-                    display: inline-block;
-                }
-            }
-        }
         .userMessages {
             list-style-type: none;
             padding: 0;
@@ -62,14 +47,14 @@
                     background: linear-gradient(142deg, rgba(102, 218, 186, 1) 0%, rgba(139, 189, 170, 1) 100%);
                     color: white;
                     padding: 5px;
-                    border-radius: 3px;
+                    border-radius: 5px;
                     margin: 0 0 5px 0;
                     box-decoration-break: clone;
                     display: inline-block;
                 }
             }
             img {
-                width: 300px;
+                width: 100%;
                 border-radius: 5px;
             }
         }
